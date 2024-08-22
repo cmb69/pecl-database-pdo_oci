@@ -6,6 +6,9 @@ jobs:
       matrix:
           version: ['8.3']
     runs-on: ubuntu-latest
+    env:
+      - name: RUNNER_ALLOW_RUNASROOT
+        value: "1"
     steps:
       - name: Setup Oracle Instant Client
         run: |
@@ -29,7 +32,7 @@ jobs:
         run: |
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
-	  make
+	  make install
           export RUNNER_ALLOW_RUNASROOT=1 make install
 #	  echo "extension=pdo_oci.so" >> /etc/php.ini
 #      - name: Test pdo_oci
