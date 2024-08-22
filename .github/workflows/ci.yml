@@ -16,7 +16,7 @@ jobs:
           mv instantclient_* /tmp/instantclient
       - name: Show directory structure
         run: |
-          cd ${{github.workspace}}/instantclient
+          cd /tmp/instantclient
           pwd
           tree
       - name: Checkout pdo_oci
