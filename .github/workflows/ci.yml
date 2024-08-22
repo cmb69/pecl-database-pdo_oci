@@ -29,7 +29,7 @@ jobs:
       - name: Show directory structure
         run: |
           php --ini
-	  cat /etc/php/${{matrix.version}}/cli/conf.d/40-pdo_oci.ini
+          cat /etc/php/${{matrix.version}}/cli/conf.d/40-pdo_oci.ini
 #      - name: Test PDO_OCI
 #        run: make test TESTS=tests
   windows:
