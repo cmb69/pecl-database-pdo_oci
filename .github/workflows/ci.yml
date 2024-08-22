@@ -10,10 +10,10 @@ jobs:
       - name: Setup Instantclient and SDK
         run: |
           curl -O https://download.oracle.com/otn_software/linux/instantclient/instantclient-sdk-linuxx64.zip
-          unzip instantclient-sdk-linuxx64.zip 'instantclient*/*'
+          unzip -o instantclient-sdk-linuxx64.zip 'instantclient*/*'
           mv instantclient_* instantclient
           curl -O https://download.oracle.com/otn_software/linux/instantclient/instantclient-basiclite-linuxx64.zip
-          unzip instantclient-basiclite-linuxx64.zip 'instantclient*/*'
+          unzip -o instantclient-basiclite-linuxx64.zip 'instantclient*/*'
           mv instantclient_* instantclient/sdk/lib
       - name: Show directory structure
         run: |
@@ -29,8 +29,9 @@ jobs:
       - name: Build pdo_oci
         run: |
           phpize
-          ./configure --with-pdo-oci=instantclient,${{github.workspace}}/instantclient/sdk/
-          make
+          ./configure --with-pdo-oci=instantclient,${{github.workspace}}/instantclient
+          make install
+#	  echo "extension=pdo_oci.so" >> /wherever/php.ini
 #      - name: Test pdo_oci
 #        run: make test TESTS=tests
   windows:
