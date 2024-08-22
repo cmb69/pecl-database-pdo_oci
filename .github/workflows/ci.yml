@@ -6,6 +6,9 @@ jobs:
       matrix:
           version: ['8.3']
     runs-on: ubuntu-latest
+    env:
+      - name: RUNNER_ALLOW_RUNASROOT
+        value: "1"
     steps:
       - name: Setup Oracle Instant Client
         run: |
