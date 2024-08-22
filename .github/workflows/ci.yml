@@ -29,9 +29,8 @@ jobs:
         run: |
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
-          make
-#	  sudo make install
-#	  echo "extension=pdo_oci.so" >> /etc/php.ini
+          make install
+	  echo "extension=pdo_oci.so" >> /etc/php.ini
 #      - name: Test pdo_oci
 #        run: make test TESTS=tests
   windows:
