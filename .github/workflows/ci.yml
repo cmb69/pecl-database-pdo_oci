@@ -20,15 +20,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{matrix.version}}
-      - name: Show directory structure
-        run: |
-          php --ini
       - name: Build PDO_OCI
         run: |
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
           sudo make install
-#          sudo echo "extension=pdo_oci.so" >> /etc/cli/conf.d/30-pdo_oci.ini
+          sudo echo "extension=pdo_oci.so" >> /etc/php/${{matrix.version}}/cli/conf.d/40-pdo_oci.ini
+      - name: Show directory structure
+        run: |
+          php --ini
 #      - name: Test pdo_oci
 #        run: make test TESTS=tests
   windows:
