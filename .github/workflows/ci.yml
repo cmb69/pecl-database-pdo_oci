@@ -7,8 +7,7 @@ jobs:
           version: ['8.3']
     runs-on: ubuntu-latest
     env:
-      - name: RUNNER_ALLOW_RUNASROOT
-        value: "1"
+      RUNNER_ALLOW_RUNASROOT: 1
     steps:
       - name: Setup Oracle Instant Client
         run: |
@@ -28,7 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{matrix.version}}
-      - name: Build pdo_oci
+      - name: Build PDO_OCI
         run: |
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
@@ -56,7 +55,7 @@ jobs:
           version: ${{matrix.version}}
           arch: ${{matrix.arch}}
           ts: ${{matrix.ts}}
-      - name: Install OCI
+      - name: Install PDO_OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Enable Developer Command Prompt
         uses: ilammy/msvc-dev-cmd@v1
