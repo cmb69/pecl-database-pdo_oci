@@ -25,7 +25,7 @@ jobs:
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
           sudo make install
-          sudo echo "extension=pdo_oci.so" >> /etc/php/${{matrix.version}}/cli/conf.d/40-pdo_oci.ini
+          sudo bash -c 'echo "extension=pdo_oci.so" > /etc/php/${{matrix.version}}/cli/conf.d/40-pdo_oci.ini'
       - name: Show directory structure
         run: |
           php --ini
