@@ -14,26 +14,21 @@ jobs:
           unzip -o instantclient-basiclite-linuxx64.zip
           unzip -o instantclient-sdk-linuxx64.zip
           mv instantclient_* /tmp/instantclient
-      - name: Show directory structure
-        run: |
-          cd /etc/
-          pwd
-          tree
-          cd /usr/lib
-          pwd
-          tree
       - name: Checkout pdo_oci
         uses: actions/checkout@v4
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{matrix.version}}
+      - name: Show directory structure
+        run: |
+          php --ini
       - name: Build PDO_OCI
         run: |
           phpize
           ./configure --with-pdo-oci=shared,instantclient,/tmp/instantclient
           sudo make install
-          sudo echo "extension=pdo_oci.so" >> /etc/php.ini
+#          sudo echo "extension=pdo_oci.so" >> /etc/cli/conf.d/30-pdo_oci.ini
 #      - name: Test pdo_oci
 #        run: make test TESTS=tests
   windows:
